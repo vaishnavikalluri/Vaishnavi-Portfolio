@@ -9,7 +9,6 @@ const navLinks = [
     { name: "Home", href: "#home" },
     { name: "About", href: "#about" },
     { name: "Skills", href: "#skills" },
-    { name: "Tools", href: "#tools" },
     { name: "Education", href: "#education" },
     { name: "Projects", href: "#projects" },
     { name: "Contact", href: "#contact" },
@@ -24,7 +23,7 @@ const Navbar = () => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 50);
 
-            const sections = ["home", "about", "skills", "tools", "education", "projects", "contact"];
+            const sections = ["home", "about", "skills", "education", "projects", "contact"];
             let currentSection = "home";
 
             // Find the section that's currently most visible

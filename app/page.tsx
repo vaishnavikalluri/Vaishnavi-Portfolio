@@ -6,19 +6,13 @@ import Hero from "@/sections/Hero";
 const About = dynamic(() => import("@/sections/About"), {
   loading: () => <div className="h-32 animate-pulse bg-gray-100 rounded-lg" />
 });
+const TechnicalSkills = dynamic(() => import("@/sections/TechnicalSkills"), {
+  loading: () => <div className="h-32 animate-pulse bg-gray-100 rounded-lg" />
+});
 const Education = dynamic(() => import("@/sections/Education"), {
   loading: () => <div className="h-32 animate-pulse bg-gray-100 rounded-lg" />
 });
 const Projects = dynamic(() => import("@/sections/Projects"), {
-  loading: () => <div className="h-32 animate-pulse bg-gray-100 rounded-lg" />
-});
-const ProjectCard = dynamic(() => import("@/components/ProjectCard"), {
-  loading: () => <div className="h-32 animate-pulse bg-gray-100 rounded-lg" />
-});
-const TechnicalSkills = dynamic(() => import("@/sections/TechnicalSkills"), {
-  loading: () => <div className="h-32 animate-pulse bg-gray-100 rounded-lg" />
-});
-const Tools = dynamic(() => import("@/sections/Tools"), {
   loading: () => <div className="h-32 animate-pulse bg-gray-100 rounded-lg" />
 });
 const Contact = dynamic(() => import("@/sections/Contact"), {
@@ -38,7 +32,6 @@ export default function Home() {
       <Hero />
       <About />
       <TechnicalSkills />
-      <Tools />
       <Education />
       <Projects />
       <Contact />
@@ -46,4 +39,3 @@ export default function Home() {
     </main>
   );
 }
-

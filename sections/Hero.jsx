@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Github, Linkedin, Mail, Download, ExternalLink, Quote as QuoteIcon, ChevronDown } from "lucide-react";
+import { Github, Linkedin, Mail, Download, ExternalLink, Quote as QuoteIcon, ChevronDown, Code2 } from "lucide-react";
 
 /**
  * Hero Section
@@ -160,6 +160,7 @@ const Hero = () => {
                             {[
                                 { icon: <Linkedin size={20} />, href: "https://www.linkedin.com/in/vaishnavikalluri/", label: "LinkedIn" },
                                 { icon: <Github size={20} />, href: "https://github.com/vaishnavikalluri", label: "GitHub" },
+                                { icon: <Code2 size={20} />, href: "https://leetcode.com/u/vaishnavi__2007/", label: "LeetCode" },
                                 { icon: <Mail size={20} />, href: "mailto:vaishnavikalluri@gmail.com", label: "Email" }
                             ].map((social, index) => (
                                 <a
@@ -209,7 +210,7 @@ const Hero = () => {
                                 <motion.img
                                     src="/pp2.png"
                                     alt="Vaishnavi Kalluri"
-                                    className="w-full h-full object-cover object-top filter grayscale-[0.05] hover:grayscale-0 transition-all duration-1000 scale-105 group-hover:scale-110"
+                                    className="w-full h-full object-cover object-[center_20%] filter grayscale-[0.05] hover:grayscale-0 transition-all duration-1000 scale-[1.12] group-hover:scale-[1.18]"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-primary/40 via-transparent to-white/5 pointer-events-none" />
                             </motion.div>
