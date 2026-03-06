@@ -2,68 +2,78 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { ExternalLink, Github, FolderOpen } from "lucide-react";
+import { ExternalLink, Github, Folder, ArrowUpRight } from "lucide-react";
 
 const ProjectCard = ({ project, index }) => {
     return (
         <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: index * 0.1 }}
-            className="group bg-white border-2 border-black/5 rounded-2xl hover:border-primary/30 transition-all duration-300 flex flex-col h-full hover-lift"
+            transition={{ delay: index * 0.1, duration: 0.5 }}
+            whileHover={{ y: -12 }}
+            className="group bg-white rounded-[2rem] border border-primary/10 shadow-sm hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 flex flex-col h-full overflow-hidden"
         >
-            {/* Header with Category Badge */}
-            <div className="p-6 pb-4 border-b-2 border-black/5">
-                <div className="flex items-start justify-between mb-3">
-                    <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                        <FolderOpen className="w-6 h-6 text-primary" />
-                    </div>
-                    <div className="flex gap-2">
-                        <a
-                            href={project.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="w-9 h-9 rounded-lg border-2 border-black/10 text-text-muted hover:border-primary hover:text-primary flex items-center justify-center transition-all"
-                        >
-                            <Github size={16} />
-                        </a>
-                        <a
-                            href={project.demo}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="w-9 h-9 rounded-lg border-2 border-black/10 text-text-muted hover:border-primary hover:text-primary flex items-center justify-center transition-all"
-                        >
-                            <ExternalLink size={16} />
-                        </a>
-                    </div>
+            {/* Project Image Placeholder / Decorative Header */}
+            <div className="h-48 w-full bg-gradient-to-br from-primary/5 via-accent/5 to-secondary/5 relative overflow-hidden flex items-center justify-center">
+                <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <Folder className="w-16 h-16 text-primary/20 group-hover:scale-110 group-hover:text-primary/40 transition-all duration-500" />
+
+                {/* Category Badge */}
+                <div className="absolute top-4 left-4">
+                    <span className="px-4 py-1.5 bg-white/80 backdrop-blur-md text-primary text-xs font-black rounded-full shadow-sm uppercase tracking-widest border border-primary/10">
+                        {project.category}
+                    </span>
                 </div>
 
-                <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-lg">
-                    {project.category}
-                </span>
+                {/* GitHub link absolute */}
+                <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/80 backdrop-blur-md text-text-muted hover:text-primary flex items-center justify-center shadow-sm transition-all hover:scale-110"
+                >
+                    <Github size={20} />
+                </a>
             </div>
 
-            {/* Content */}
-            <div className="p-6 flex-1 flex flex-col">
-                <h3 className="text-xl font-bold text-text mb-3 group-hover:text-primary transition-colors">
-                    {project.title}
-                </h3>
+            {/* Content Area */}
+            <div className="p-8 flex-1 flex flex-col">
+                <div className="flex justify-between items-start mb-4">
+                    <h3 className="text-2xl font-black text-text-main group-hover:text-primary transition-colors duration-300">
+                        {project.title}
+                    </h3>
+                </div>
 
-                <p className="text-text-muted text-sm leading-relaxed mb-5 flex-1">
+                <p className="text-text-muted text-base leading-relaxed mb-8 flex-1">
                     {project.description}
                 </p>
 
-                {/* Tags */}
-                <div className="flex flex-wrap gap-2">
+                {/* Tech Stack Tags */}
+                <div className="flex flex-wrap gap-2 mb-8">
                     {project.tags.map((tag) => (
                         <span
                             key={tag}
-                            className="px-3 py-1.5 text-xs font-semibold text-text-muted border-2 border-black/10 rounded-lg hover:border-primary/40 hover:text-primary transition-colors"
+                            className="px-4 py-1.5 text-xs font-bold text-primary bg-primary/5 rounded-full border border-primary/10 group-hover:border-primary/30 transition-colors"
                         >
                             {tag}
                         </span>
                     ))}
+                </div>
+
+                {/* Action Button */}
+                <div className="pt-6 border-t border-slate-50">
+                    <a
+                        href={project.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-primary font-black uppercase tracking-widest text-sm group/btn"
+                    >
+                        Live Preview
+                        <span className="p-2 bg-primary/10 rounded-full group-hover/btn:bg-primary group-hover/btn:text-white transition-all duration-300">
+                            <ArrowUpRight size={18} />
+                        </span>
+                    </a>
                 </div>
             </div>
         </motion.div>

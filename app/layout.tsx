@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display, Indie_Flower } from "next/font/google";
+import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import ErrorBoundary from "@/components/ErrorBoundary";
 
@@ -9,18 +9,12 @@ const inter = Inter({
   display: 'swap',
 });
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
   display: 'swap',
 });
 
-const indieFlower = Indie_Flower({
-  variable: "--font-indie",
-  subsets: ["latin"],
-  weight: "400",
-  display: 'swap',
-});
 
 
 export const metadata: Metadata = {
@@ -82,10 +76,10 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <meta name="theme-color" content="#537d9a" />
+        <meta name="theme-color" content="#6366f1" />
       </head>
       <body
-        className={`${inter.variable} ${playfair.variable} ${indieFlower.variable} antialiased`}
+        className={`${inter.variable} ${outfit.variable} antialiased`}
       >
         <ErrorBoundary>
           {children}

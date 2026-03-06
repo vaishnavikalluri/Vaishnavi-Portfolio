@@ -35,7 +35,7 @@ const projects = [
         description: "Created a GUI-based Tic Tac Toe game in Python where players can compete against the computer. Used Tkinter for the interface and implemented core game logic with basic AI for computer moves.",
         tags: ["Python", "Tkinter"],
         github: "https://github.com/vaishnavikalluri/Tic-tac-toe-python"
-        
+
     }
 ];
 

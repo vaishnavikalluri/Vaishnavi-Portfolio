@@ -7,7 +7,9 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
     { name: "Home", href: "#home" },
-    { name: "About Me", href: "#about" },
+    { name: "About", href: "#about" },
+    { name: "Skills", href: "#skills" },
+    { name: "Tools", href: "#tools" },
     { name: "Education", href: "#education" },
     { name: "Projects", href: "#projects" },
     { name: "Contact", href: "#contact" },
@@ -21,10 +23,10 @@ const Navbar = () => {
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 50);
-            
-            const sections = ["home", "about", "education", "projects", "contact"];
+
+            const sections = ["home", "about", "skills", "tools", "education", "projects", "contact"];
             let currentSection = "home";
-            
+
             // Find the section that's currently most visible
             for (let i = sections.length - 1; i >= 0; i--) {
                 const section = sections[i];
@@ -38,10 +40,10 @@ const Navbar = () => {
                     }
                 }
             }
-            
+
             setActiveSection(currentSection);
         };
-        
+
         handleScroll(); // Run on mount
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
@@ -70,10 +72,9 @@ const Navbar = () => {
                                 {link.name}
                             </span>
                             {/* Underline for active section */}
-                            <span 
-                                className={`absolute bottom-0 left-0 right-0 h-0.5 bg-primary transition-all duration-300 ${
-                                    activeSection === link.href.slice(1) ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100'
-                                }`}
+                            <span
+                                className={`absolute bottom-0 left-0 right-0 h-0.5 bg-primary transition-all duration-300 ${activeSection === link.href.slice(1) ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100'
+                                    }`}
                             />
                         </Link>
                     ))}

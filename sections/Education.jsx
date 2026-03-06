@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import SectionWrapper from "../components/SectionWrapper";
-import { GraduationCap, Calendar, MapPin, BookOpen } from "lucide-react";
+import { GraduationCap, Calendar, MapPin, School, Award, CheckCircle2 } from "lucide-react";
 
 const educationData = [
     {
@@ -11,76 +11,81 @@ const educationData = [
         institution: "The Apollo University, Chittoor",
         duration: "2024 - 2028",
         location: "Chittoor, Andhra Pradesh",
-        focus: "Core Software Engineering, Data Structures, Algorithms, Web Technologies, and AI Fundamentals.",
+        details: "Focusing on Full Stack Development, Data Structures, Algorithms, and Artificial Intelligence.",
+        status: "Currently Pursuing",
+        icon: <GraduationCap className="w-6 h-6" />
+    },
+    {
+        degree: "Intermediate (MPC)",
+        institution: "Sri Chaitanya Junior College",
+        duration: "2022 - 2024",
+        location: "Andhra Pradesh",
+        details: "Specialized in Mathematics, Physics, and Chemistry.",
+        status: "95% Percentage",
+        icon: <Award className="w-6 h-6" />
+    },
+    {
+        degree: "Schooling (SSC)",
+        institution: "Vignan High School",
+        duration: "2021 - 2022",
+        location: "Andhra Pradesh",
+        details: "Foundational education with a focus on science and mathematics.",
+        status: "10 CGPA",
+        icon: <School className="w-6 h-6" />
     }
 ];
 
 const Education = () => {
     return (
-        <SectionWrapper id="education" title="Education" subtitle="My Academic Journey">
-            <div className="max-w-4xl mx-auto relative">
-                {/* Continuous Timeline Line */}
-                {educationData.length > 1 && (
-                    <div className="absolute left-[19px] top-6 bottom-12 w-0.5 bg-black/10" />
-                )}
-                
+        <SectionWrapper id="education" title="Education" subtitle="My Academic Background">
+            <div className="max-w-4xl mx-auto relative px-4">
+                {/* Timeline Center Line */}
+                <div className="absolute left-4 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-1 bg-gradient-to-b from-primary/20 via-primary/50 to-primary/20 rounded-full" />
+
                 {educationData.map((edu, index) => (
-                    <div key={index} className="relative pl-12 pb-12 last:pb-0">
-                        {/* Timeline Node */}
-                        <div className="absolute left-0 top-6 w-10 h-10 bg-white border-2 border-primary rounded-xl flex items-center justify-center z-10">
-                            <GraduationCap className="w-5 h-5 text-primary" />
-                        </div>
+                    <div key={index} className={`relative flex flex-col md:flex-row items-center mb-16 last:mb-0 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
 
-                        <motion.div
-                            initial={{ opacity: 0, x: 20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
-                            className="bg-white border-2 border-black/5 rounded-2xl hover:border-primary/30 transition-all overflow-hidden hover-lift"
-                        >
-                            {/* Header Section */}
-                            <div className="p-6 pb-4 border-b-2 border-black/5 bg-[#fdfaf5]">
-                                <div className="mb-4">
-                                    <h3 className="text-xl font-bold text-text mb-1">{edu.degree}</h3>
-                                    <p className="text-base font-semibold text-text-muted">{edu.institution}</p>
-                                </div>
+                        {/* Timeline Dot */}
+                        <div className="absolute left-4 md:left-1/2 md:-translate-x-1/2 top-0 md:top-8 w-8 h-8 bg-white border-4 border-primary rounded-full z-10 shadow-lg shadow-primary/20" />
 
-                                <div className="flex flex-wrap gap-3">
-                                    <span className="flex items-center gap-2 px-3 py-1.5 bg-white border-2 border-primary/20 rounded-lg text-primary text-sm font-semibold">
-                                        <Calendar size={14} /> {edu.duration}
-                                    </span>
-                                    <span className="flex items-center gap-2 px-3 py-1.5 bg-white border-2 border-black/10 rounded-lg text-text-muted text-sm font-semibold">
-                                        <MapPin size={14} /> {edu.location}
-                                    </span>
-                                </div>
-                            </div>
-
-                            {/* Content Section */}
-                            <div className="p-6">
-                                <div className="mb-5">
-                                    <h4 className="text-sm font-bold text-text uppercase tracking-wider mb-2 flex items-center gap-2">
-                                        <BookOpen size={16} className="text-primary" />
-                                        Focus Areas
-                                    </h4>
-                                    <p className="text-text-muted leading-relaxed">
-                                        {edu.focus}
-                                    </p>
-                                </div>
-
-                                {/* Current Status */}
-                                {/* <div className="pt-5 border-t-2 border-black/5">
-                                    <div className="flex items-center gap-3 p-4 bg-[#fdfaf5] rounded-xl border-2 border-primary/10">
-                                        <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                                            <GraduationCap className="w-5 h-5 text-primary" />
-                                        </div>
-                                        <div>
-                                            <p className="text-xs text-text-muted font-bold uppercase tracking-wider mb-0.5">Current Focus</p>
-                                            <p className="text-sm font-bold text-text">Advanced Software Engineering Patterns</p>
-                                        </div>
+                        {/* Content Card */}
+                        <div className={`w-full md:w-[45%] ml-12 md:ml-0`}>
+                            <motion.div
+                                initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6, delay: index * 0.1 }}
+                                className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-primary/10 hover:border-primary/30 transition-all hover:shadow-xl group"
+                            >
+                                <div className="flex items-center gap-4 mb-6">
+                                    <div className="p-3 bg-primary/10 text-primary rounded-2xl group-hover:scale-110 transition-transform">
+                                        {edu.icon}
                                     </div>
-                                </div> */}
-                            </div>
-                        </motion.div>
+                                    <div>
+                                        <div className="flex items-center gap-2 text-primary font-bold text-sm tracking-widest uppercase">
+                                            <Calendar size={14} /> {edu.duration}
+                                        </div>
+                                        <h3 className="text-xl font-bold text-text-main mt-1">{edu.degree}</h3>
+                                    </div>
+                                </div>
+
+                                <div className="space-y-4">
+                                    <div className="flex items-start gap-2 text-text-muted font-medium italic">
+                                        <MapPin size={18} className="text-primary mt-1 shrink-0" />
+                                        <span>{edu.institution}, {edu.location}</span>
+                                    </div>
+
+                                    <p className="text-text-muted leading-relaxed">
+                                        {edu.details}
+                                    </p>
+
+                                    <div className="pt-4 border-t border-slate-100 flex items-center gap-2 text-primary font-bold">
+                                        <CheckCircle2 size={18} />
+                                        <span>{edu.status}</span>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        </div>
                     </div>
                 ))}
             </div>

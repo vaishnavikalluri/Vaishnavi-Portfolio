@@ -12,6 +12,15 @@ const Education = dynamic(() => import("@/sections/Education"), {
 const Projects = dynamic(() => import("@/sections/Projects"), {
   loading: () => <div className="h-32 animate-pulse bg-gray-100 rounded-lg" />
 });
+const ProjectCard = dynamic(() => import("@/components/ProjectCard"), {
+  loading: () => <div className="h-32 animate-pulse bg-gray-100 rounded-lg" />
+});
+const TechnicalSkills = dynamic(() => import("@/sections/TechnicalSkills"), {
+  loading: () => <div className="h-32 animate-pulse bg-gray-100 rounded-lg" />
+});
+const Tools = dynamic(() => import("@/sections/Tools"), {
+  loading: () => <div className="h-32 animate-pulse bg-gray-100 rounded-lg" />
+});
 const Contact = dynamic(() => import("@/sections/Contact"), {
   loading: () => <div className="h-32 animate-pulse bg-gray-100 rounded-lg" />
 });
@@ -28,6 +37,8 @@ export default function Home() {
       <Navbar />
       <Hero />
       <About />
+      <TechnicalSkills />
+      <Tools />
       <Education />
       <Projects />
       <Contact />
