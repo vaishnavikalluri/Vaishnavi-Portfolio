@@ -146,8 +146,9 @@ const Hero = () => {
                             </button>
 
                             <a
-                                href="/resume.pdf"
-                                download
+                                href="https://drive.google.com/file/d/1Uem0Fua-ekEjJdwSK-X--FV27E9FcURj/view?usp=sharing"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="group px-6 md:px-8 py-3.5 bg-transparent text-primary border-2 border-primary font-bold rounded-full transition-all transform hover:scale-105 flex items-center gap-2"
                             >
                                 <span className="font-heading tracking-wide uppercase text-[10px] md:text-xs whitespace-nowrap">Resume</span>

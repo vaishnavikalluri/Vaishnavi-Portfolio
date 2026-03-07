@@ -7,7 +7,11 @@ import {
     Monitor,
     Server,
     Database,
-    Wrench
+    Wrench,
+    Users,
+    MessageSquare,
+    Handshake,
+    Zap
 } from "lucide-react";
 
 // Skill Data with specific styling for each card
@@ -35,6 +39,7 @@ const cardSkills = [
         glowColor: "rgba(59, 130, 246, 0.08)",
         skills: [
             { name: "React", logo: "https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg" },
+            { name: "Next.js", logo: "https://raw.githubusercontent.com/devicons/devicon/master/icons/nextjs/nextjs-original.svg" },
             { name: "HTML5", logo: "https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg" },
             { name: "CSS3", logo: "https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg" },
             { name: "Tailwind CSS", logo: "https://raw.githubusercontent.com/devicons/devicon/master/icons/tailwindcss/tailwindcss-original.svg" },
@@ -78,6 +83,12 @@ const tools = [
     { name: "Canva", logo: "https://www.canva.com/favicon.ico" },
     { name: "Ubuntu", logo: "https://raw.githubusercontent.com/devicons/devicon/master/icons/ubuntu/ubuntu-plain.svg" },
     { name: "Bruno", logo: "https://www.usebruno.com/favicon.png" }
+];
+
+const softSkills = [
+    { name: "Communication", icon: <MessageSquare size={14} /> },
+    { name: "Team Collaboration", icon: <Handshake size={14} /> },
+    { name: "Adaptability", icon: <Zap size={14} /> }
 ];
 
 const TechnicalSkills = () => {
@@ -179,54 +190,108 @@ const TechnicalSkills = () => {
                     ))}
                 </div>
 
-                {/* --- TOOLS & PLATFORMS SECTION: KEEPING AS REFINED PREVIOUSLY --- */}
-                <div className="mt-4">
-                    <motion.h3
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        className="text-[20px] font-bold text-[#111827] mb-8 flex items-center gap-3 uppercase tracking-wider text-sm text-[#6B7280]"
-                    >
-                        <Wrench className="w-4 h-4 text-[#F59E0B]" />
-                        Tools & Platforms
-                    </motion.h3>
+                {/* --- TOOLS & PLATFORMS SECTION: WRAPPED IN A CARD --- */}
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.1 }}
+                    className="p-8 md:p-10 rounded-[20px] border border-[#E5E7EB] shadow-[0_6px_25px_rgba(0,0,0,0.04)] bg-white relative overflow-hidden group"
+                    style={{
+                        borderTop: "3px solid #F59E0B",
+                        background: "linear-gradient(180deg, #ffffff, rgba(245, 158, 11, 0.05))"
+                    }}
+                >
+                    {/* Background Subtle Accent */}
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-[#F59E0B]/5 rounded-full blur-3xl -z-10" />
 
-                    <motion.div
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        className="flex flex-wrap gap-x-6 gap-y-5"
-                    >
-                        {tools.map((tool, index) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: 10 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.05 }}
-                                whileHover={{
-                                    y: -2,
-                                    borderColor: "#F59E0B",
-                                    backgroundColor: "#ffffff",
-                                    boxShadow: "0 4px 12px rgba(245, 158, 11, 0.1)"
-                                }}
-                                className="flex items-center gap-3 px-5 py-2.5 bg-white/60 backdrop-blur-sm rounded-full border border-[#E5E7EB] shadow-sm transition-all duration-200 group/chip cursor-default"
-                            >
-                                <div className="w-[18px] h-[18px] flex items-center justify-center">
-                                    <img
-                                        src={tool.logo}
-                                        alt={tool.name}
-                                        className="w-full h-full object-contain opacity-90 group-hover/chip:opacity-100 transition-all"
-                                        onError={(e) => { e.target.src = "https://www.svgrepo.com/show/452228/html-5.svg"; }}
-                                    />
-                                </div>
-                                <span className="text-[14px] font-bold text-[#6B7280] group-hover/chip:text-[#111827] transition-colors uppercase tracking-tight">
-                                    {tool.name}
-                                </span>
-                            </motion.div>
-                        ))}
-                    </motion.div>
-                </div>
+                    <div className="flex flex-col gap-8">
+                        <div className="flex items-center gap-3">
+                            <div className="p-2 bg-amber-50 rounded-lg text-[#F59E0B] shadow-sm border border-amber-100/50">
+                                <Wrench size={18} />
+                            </div>
+                            <h3 className="text-[20px] font-bold text-[#111827] uppercase tracking-wider text-sm">
+                                Tools & Platforms
+                            </h3>
+                        </div>
+
+                        <div className="flex flex-wrap gap-x-4 gap-y-3">
+                            {tools.map((tool, index) => (
+                                <motion.div
+                                    key={index}
+                                    whileHover={{
+                                        y: -2,
+                                        borderColor: "#F59E0B",
+                                        backgroundColor: "#ffffff",
+                                        boxShadow: "0 4px 12px rgba(245, 158, 11, 0.08)"
+                                    }}
+                                    className="flex items-center gap-2.5 px-4 py-2 bg-slate-50/50 rounded-full border border-slate-100 shadow-sm transition-all duration-200 group/chip cursor-default"
+                                >
+                                    <div className="w-[16px] h-[16px] flex items-center justify-center">
+                                        <img
+                                            src={tool.logo}
+                                            alt={tool.name}
+                                            className="w-full h-full object-contain opacity-80 group-hover/chip:opacity-100 transition-all"
+                                            onError={(e) => { e.target.src = "https://www.svgrepo.com/show/452228/html-5.svg"; }}
+                                        />
+                                    </div>
+                                    <span className="text-[13px] font-bold text-[#6B7280] group-hover/chip:text-[#111827] transition-colors uppercase tracking-tight">
+                                        {tool.name}
+                                    </span>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </motion.div>
+
+                {/* --- SOFT SKILLS SECTION --- */}
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                    className="p-8 md:p-10 rounded-[20px] border border-[#E5E7EB] shadow-[0_6px_25px_rgba(0,0,0,0.04)] bg-white relative overflow-hidden group mt-10"
+                    style={{
+                        borderTop: "3px solid #1A3263",
+                        background: "linear-gradient(180deg, #ffffff, rgba(26, 50, 99, 0.03))"
+                    }}
+                >
+                    {/* Background Subtle Accent */}
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-[#1A3263]/5 rounded-full blur-3xl -z-10" />
+
+                    <div className="flex flex-col gap-8">
+                        <div className="flex items-center gap-3">
+                            <div className="p-2 bg-blue-50 rounded-lg text-[#1A3263] shadow-sm border border-blue-100/50">
+                                <Users size={18} />
+                            </div>
+                            <h3 className="text-[20px] font-bold text-[#111827] uppercase tracking-wider text-sm">
+                                Soft Skills
+                            </h3>
+                        </div>
+
+                        <div className="flex flex-wrap gap-x-4 gap-y-3">
+                            {softSkills.map((skill, index) => (
+                                <motion.div
+                                    key={index}
+                                    whileHover={{
+                                        y: -2,
+                                        borderColor: "#1A3263",
+                                        backgroundColor: "#ffffff",
+                                        boxShadow: "0 4px 12px rgba(26, 50, 99, 0.08)"
+                                    }}
+                                    className="flex items-center gap-3 px-5 py-2.5 bg-slate-50/50 rounded-full border border-slate-100 shadow-sm transition-all duration-200 group/chip cursor-default"
+                                >
+                                    <div className="text-blue-500 opacity-80 group-hover/chip:opacity-100 group-hover/chip:scale-110 transition-all">
+                                        {skill.icon}
+                                    </div>
+                                    <span className="text-[13px] font-bold text-[#6B7280] group-hover/chip:text-[#1A3263] transition-colors uppercase tracking-tight">
+                                        {skill.name}
+                                    </span>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </motion.div>
 
             </div>
         </section>

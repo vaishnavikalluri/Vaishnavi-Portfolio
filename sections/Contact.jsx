@@ -3,122 +3,127 @@
 import React from "react";
 import { motion } from "framer-motion";
 import SectionWrapper from "../components/SectionWrapper";
-import { Mail, Linkedin, MapPin, Send, MessageSquare } from "lucide-react";
+import { Mail, Github, MapPin, MessageSquare, ArrowUpRight } from "lucide-react";
 
 const contactDetails = [
     {
-        icon: <Mail className="w-6 h-6" />,
+        icon: <Mail className="w-5 h-5" />,
         label: "Email",
         value: "vaishnavikalluri@gmail.com",
         href: "mailto:vaishnavikalluri@gmail.com",
-        color: "bg-primary/5 text-primary border-primary/20"
+        iconBg: "bg-blue-50",
+        iconColor: "text-blue-600"
     },
     {
-        icon: <Linkedin className="w-6 h-6" />,
-        label: "LinkedIn",
+        icon: <Github className="w-5 h-5" />,
+        label: "GitHub",
         value: "vaishnavikalluri",
-        href: "https://www.linkedin.com/in/vaishnavikalluri/",
-        color: "bg-secondary/5 text-secondary border-secondary/20"
+        href: "https://github.com/vaishnavikalluri",
+        iconBg: "bg-blue-50",
+        iconColor: "text-blue-600",
+        isExternal: true
     },
     {
-        icon: <MapPin className="w-6 h-6" />,
+        icon: <MapPin className="w-5 h-5" />,
         label: "Location",
         value: "Andhra Pradesh, India",
         href: "#",
-        color: "bg-accent/5 text-accent border-accent/20"
+        iconBg: "bg-blue-50",
+        iconColor: "text-blue-600"
     }
 ];
 
 const Contact = () => {
     return (
-        <SectionWrapper id="contact" title="Get In Touch" subtitle="Let's Connect">
-            <div className="max-w-6xl mx-auto px-4">
-                <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <SectionWrapper
+            id="contact"
+            title="Get In Touch"
+            subtitle="LET'S CONNECT"
+            className="bg-gradient-to-b from-white to-slate-50 min-h-[90vh] flex items-center py-20"
+        >
+            <div className="max-w-6xl mx-auto px-4 w-full">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
-                    {/* Left Column: Info & Content */}
-                    <div>
-                        <motion.h3
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            className="text-4xl md:text-5xl font-black text-text-main mb-6 leading-tight"
-                        >
-                            Let’s build something <span className="text-primary italic">meaningful</span> together.
-                        </motion.h3>
+                    {/* Left Side Content */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5 }}
+                        className="flex flex-col"
+                    >
+                        <h3 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6 leading-tight">
+                            Let’s build something <span className="italic text-primary">meaningful</span> together.
+                        </h3>
 
-                        <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.1 }}
-                            className="text-xl text-text-muted mb-10 leading-relaxed max-w-lg"
-                        >
-                            Whether you're looking to build a new product, improve an existing application, or collaborate on exciting ideas — I'd love to connect.
-                        </motion.p>
+                        <p className="text-slate-600 text-base md:text-lg mb-10 leading-relaxed max-w-lg">
+                            Whether you're looking to collaborate, discuss ideas, or build something impactful, I'd love to connect.
+                        </p>
 
-                        <div className="space-y-4">
-                            {contactDetails.map((detail, index) => (
+                        {/* Contact Information Cards */}
+                        <div className="grid gap-4 max-w-md">
+                            {contactDetails.map((item, index) => (
                                 <motion.a
-                                    key={detail.label}
-                                    href={detail.href}
-                                    target={detail.href.startsWith('http') ? "_blank" : "_self"}
-                                    initial={{ opacity: 0, x: -20 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: index * 0.1 }}
-                                    className={`flex items-center gap-4 p-5 rounded-3xl border-2 transition-all hover:scale-105 ${detail.color} group relative`}
+                                    key={index}
+                                    href={item.href}
+                                    target={item.href.startsWith("http") ? "_blank" : "_self"}
+                                    whileHover={{ y: -4 }}
+                                    className="flex items-center justify-between p-4 rounded-xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 group"
                                 >
-                                    <div className="bg-white p-3 rounded-2xl shadow-sm group-hover:rotate-12 transition-transform">
-                                        {detail.icon}
+                                    <div className="flex items-center gap-4">
+                                        <div className={`p-3 rounded-lg ${item.iconBg} ${item.iconColor} shadow-inner`}>
+                                            {item.icon}
+                                        </div>
+                                        <div className="flex flex-col">
+                                            <h5 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1.5">
+                                                {item.label}
+                                            </h5>
+                                            <p className="text-slate-700 font-semibold text-sm md:text-base leading-none">
+                                                {item.value}
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div className="relative z-10">
-                                        <p className="text-xs font-black uppercase tracking-widest opacity-70 mb-0.5">{detail.label}</p>
-                                        <p className="text-base font-bold">{detail.value}</p>
-                                    </div>
+                                    {item.isExternal && (
+                                        <ArrowUpRight size={16} className="text-slate-300 group-hover:text-primary transition-colors" />
+                                    )}
                                 </motion.a>
                             ))}
                         </div>
-                    </div>
+                    </motion.div>
 
-                    {/* Right Column: CTA Card */}
+                    {/* Right Side Conversation Card */}
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
+                        initial={{ opacity: 0, scale: 0.95 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
-                        className="relative"
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                        className="w-full flex justify-center md:justify-end"
                     >
-                        {/* Decorative Background Glow */}
-                        <div className="absolute inset-0 bg-primary/20 rounded-[3rem] blur-3xl -z-10 animate-pulse" />
+                        <div className="bg-white p-6 md:p-8 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden group max-w-sm w-full">
+                            <div className="relative z-10 flex flex-col items-center text-center">
+                                <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-6 shadow-inner">
+                                    <MessageSquare className="w-8 h-8" />
+                                </div>
 
-                        <div className="bg-white p-10 md:p-12 rounded-[3.5rem] border-2 border-primary/20 shadow-2xl relative overflow-hidden flex flex-col items-center text-center">
-                            <div className="w-20 h-20 bg-primary/10 rounded-3xl flex items-center justify-center mb-8">
-                                <MessageSquare className="w-10 h-10 text-primary" />
+                                <h4 className="text-2xl font-bold text-slate-900 mb-3">
+                                    Start a Conversation
+                                </h4>
+
+                                <p className="text-slate-500 text-sm md:text-base mb-8 max-w-[280px]">
+                                    I'm active on LinkedIn and usually respond within a few hours. Feel free to connect!
+                                </p>
+
+                                {/* CTA Button */}
+                                <div className="w-full flex justify-center">
+                                    <a
+                                        href="https://www.linkedin.com/in/vaishnavikalluri/"
+                                        target="_blank"
+                                        className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white text-sm font-bold rounded-full hover:bg-blue-700 transition-all shadow-md active:scale-95"
+                                    >
+                                        Connect on LinkedIn →
+                                    </a>
+                                </div>
                             </div>
-
-                            <h4 className="text-3xl font-black text-text-main mb-4">Start a Conversation</h4>
-                            <p className="text-text-muted mb-10 text-lg">
-                                I typically respond within a few hours. Looking forward to hearing from you!
-                            </p>
-
-                            <div className="flex flex-col sm:flex-row gap-4 w-full">
-                                <a
-                                    href="mailto:vaishnavikalluri@gmail.com"
-                                    className="flex-1 px-8 py-5 bg-primary text-white font-black rounded-2xl shadow-lg shadow-primary/20 hover:bg-primary-dark transition-all transform hover:-translate-y-1 flex items-center justify-center gap-3 uppercase tracking-widest text-sm"
-                                >
-                                    Send Email <Send size={18} />
-                                </a>
-                                <a
-                                    href="https://www.linkedin.com/in/vaishnavikalluri/"
-                                    target="_blank"
-                                    className="flex-1 px-8 py-5 bg-slate-900 text-white font-black rounded-2xl shadow-lg hover:bg-black transition-all transform hover:-translate-y-1 flex items-center justify-center gap-3 uppercase tracking-widest text-sm"
-                                >
-                                    LinkedIn <Linkedin size={18} />
-                                </a>
-                            </div>
-
-                            {/* Floating decorative elements */}
-                            <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-primary/5 rounded-full blur-xl" />
-                            <div className="absolute -top-6 -left-6 w-20 h-20 bg-secondary/5 rounded-full blur-xl" />
                         </div>
                     </motion.div>
 

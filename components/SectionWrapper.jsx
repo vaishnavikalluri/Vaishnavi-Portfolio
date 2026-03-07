@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 const SectionWrapper = ({ children, id, className = "", title, subtitle }) => {
     return (
-        <section id={id} className={`section-padding bg-[#f5f3ef] ${className}`}>
+        <section id={id} className={`section-padding ${className.includes('bg-') ? '' : 'bg-[#f5f3ef]'} ${className}`}>
             <div className="container-custom">
                 {(title || subtitle) && (
                     <div className="mb-16 text-center">

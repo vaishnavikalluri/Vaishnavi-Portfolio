@@ -30,7 +30,7 @@ const educationData = [
         institution: "The Apollo University",
         location: "Chittoor, Andhra Pradesh",
         year: "2024 - 2028",
-        result: "8.5 (Current)",
+        result: "8.5 CGPA(Current)",
         resultType: "cgpa",
         details: "Focusing on Full Stack Development, Data Structures, Algorithms, and Artificial Intelligence.",
         status: "Currently Pursuing 4th Semester",
@@ -82,73 +82,94 @@ const Education = () => {
                     />
                 </div>
 
-                {/* --- HORIZONTAL TIMELINE --- */}
-                <div className="relative mt-20 mb-10">
-                    {/* Continuous Timeline Line */}
+                {/* --- HORIZONTAL TRAVELING TIMELINE --- */}
+                <div className="relative mt-20 mb-10 overflow-visible">
+                    {/* Background Progress Line */}
                     <div className="absolute top-[9px] left-0 right-0 h-1 bg-[#E5E7EB] rounded-full hidden md:block" />
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
+                    {/* Animated Progress Line - Travels across */}
+                    <motion.div
+                        initial={{ width: 0 }}
+                        whileInView={{ width: "100%" }}
+                        viewport={{ once: false, amount: 0.5 }}
+                        transition={{ duration: 3, ease: "easeInOut" }}
+                        className="absolute top-[9px] left-0 h-1 bg-[#1A3263] rounded-full hidden md:block z-0"
+                    />
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 relative">
                         {educationData.map((edu, index) => (
                             <div key={index} className="flex flex-col items-center">
-                                {/* Timeline Node */}
-                                <motion.div
-                                    initial={{ scale: 0 }}
-                                    whileInView={{ scale: 1 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: edu.delay, type: "spring", stiffness: 260, damping: 20 }}
-                                    className="w-[18px] h-[18px] rounded-full bg-[#1A3263] border-4 border-white shadow-[0_0_0_3px_rgba(26,50,99,0.2)] relative z-10 mb-8 hidden md:block"
-                                />
+                                {/* Timeline Node & Floating Year Display */}
+                                <div className="relative mb-8 hidden md:flex flex-col items-center">
+                                    <motion.span
+                                        initial={{ opacity: 0, y: -10 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: false, amount: 0.5 }}
+                                        transition={{ delay: index * 0.8 + 0.5, duration: 1 }}
+                                        className="absolute -top-12 text-[14px] font-bold text-[#1A3263] bg-white px-4 py-1.5 rounded-full shadow-sm border border-[#E5E7EB] whitespace-nowrap z-30"
+                                    >
+                                        {edu.year}
+                                    </motion.span>
+
+                                    <motion.div
+                                        initial={{ scale: 0 }}
+                                        whileInView={{ scale: 1 }}
+                                        viewport={{ once: false, amount: 0.5 }}
+                                        transition={{ delay: index * 0.8, type: "spring", stiffness: 150, damping: 20 }}
+                                        className="w-[18px] h-[18px] rounded-full bg-[#1A3263] border-4 border-white shadow-[0_0_0_3px_rgba(26,50,99,0.2)] relative z-20"
+                                    />
+                                </div>
 
                                 {/* Education Card */}
                                 <motion.div
-                                    initial={{ opacity: 0, y: 30 }}
+                                    initial={{ opacity: 0, y: 40 }}
                                     whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: edu.delay + 0.1, duration: 0.6 }}
+                                    viewport={{ once: false, amount: 0.2 }}
+                                    transition={{ delay: index * 0.8 + 1.2, duration: 1, ease: "easeOut" }}
                                     whileHover={{
-                                        y: -6,
-                                        boxShadow: "0 14px 28px rgba(0,0,0,0.08)"
+                                        y: -8,
+                                        boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.1)"
                                     }}
-                                    className="bg-white p-6 rounded-[18px] border border-[#E5E7EB] shadow-[0_8px_20px_rgba(0,0,0,0.05)] w-full max-w-[340px] transition-all duration-300 relative"
+                                    className="bg-white p-7 rounded-[22px] border border-[#E5E7EB] shadow-[0_4px_20px_rgba(0,0,0,0.03)] w-full max-w-[360px] transition-all duration-300 relative group"
                                 >
                                     {/* Mobile Timeline indicator */}
-                                    <div className="md:hidden absolute -left-6 top-8 w-3 h-3 rounded-full bg-[#1A3263]" />
+                                    <div className="md:hidden absolute -left-6 top-10 w-3 h-3 rounded-full bg-[#1A3263]" />
 
-                                    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-2">
-                                        <span className="text-[14px] font-bold text-[#F59E0B] tracking-wide">
-                                            {edu.year}
-                                        </span>
-                                        <span className="text-[#9CA3AF]">•</span>
-                                        <div className="flex items-center gap-1 text-[14px] font-bold text-[#16A34A;]">
+                                    {/* Mobile Year Badge */}
+                                    <div className="md:hidden mb-4 inline-block px-3 py-1 rounded-full bg-slate-50 border border-slate-100 text-[12px] font-bold text-[#1A3263]">
+                                        {edu.year}
+                                    </div>
+
+                                    <div className="flex justify-between items-start mb-4 gap-3">
+                                        <h3 className="text-[19px] font-extrabold text-[#111827] leading-tight group-hover:text-[#1A3263] transition-colors">
+                                            {edu.degree}
+                                        </h3>
+                                        <div className="flex items-center gap-1 text-[#F59E0B] text-[15px] font-black whitespace-nowrap pt-0.5">
                                             {edu.resultType === "percentage" ? (
-                                                <BarChart size={14} className="stroke-[3px]" />
+                                                <BarChart size={16} className="stroke-[3.5px]" />
                                             ) : (
-                                                <Star size={14} className="fill-[#F59E0B] stroke-[#F59E0B]" />
+                                                <Star size={16} className="fill-[#F59E0B] stroke-[#F59E0B]" />
                                             )}
-                                            <span>{edu.result}</span>
+                                            {edu.result}
                                         </div>
                                     </div>
 
-                                    <h3 className="text-[20px] font-bold text-[#111827] leading-tight mb-2">
-                                        {edu.degree}
-                                    </h3>
-
-                                    <p className="text-[15px] font-semibold text-[#1A3263] mb-2 leading-tight">
+                                    <p className="text-[15px] font-bold text-[#1A3263] mb-3 leading-tight opacity-90">
                                         {edu.institution}
                                     </p>
 
-                                    <div className="flex items-center gap-1.5 text-[13px] text-[#6B7280] font-medium mb-4">
-                                        <MapPin size={14} className="text-[#1A3263]" />
+                                    <div className="flex items-center gap-2 text-[13px] text-[#6B7280] font-medium mb-5">
+                                        <MapPin size={14} className="text-[#1A3263] opacity-70" />
                                         <span>{edu.location}</span>
                                     </div>
 
-                                    <p className="text-[14px] text-[#6B7280] leading-relaxed mb-4">
+                                    <p className="text-[14px] text-[#6B7280] leading-relaxed mb-6 font-medium">
                                         {edu.details}
                                     </p>
 
                                     {edu.isCurrent && (
                                         <div className="flex items-center gap-2">
-                                            <span className="bg-[rgba(245,158,11,0.1)] text-[#F59E0B] font-bold px-3 py-1 rounded-full text-[13px] tracking-tight border border-[#F59E0B]/20">
+                                            <span className="bg-[rgba(245,158,11,0.08)] text-[#F59E0B] font-black px-4 py-1.5 rounded-xl text-[11px] uppercase tracking-wider border border-[#F59E0B]/20">
                                                 {edu.status}
                                             </span>
                                         </div>

@@ -2,7 +2,8 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { ExternalLink, Github, Folder, ArrowUpRight } from "lucide-react";
+import { Github, ExternalLink, Folder, ArrowUpRight } from "lucide-react";
+import Image from "next/image";
 
 const ProjectCard = ({ project, index }) => {
     return (
@@ -10,69 +11,80 @@ const ProjectCard = ({ project, index }) => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: index * 0.1, duration: 0.5 }}
-            whileHover={{ y: -12 }}
-            className="group bg-white rounded-[2rem] border border-primary/10 shadow-sm hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 flex flex-col h-full overflow-hidden"
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className="group relative bg-white rounded-xl border border-slate-200/60 shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-primary/30 transition-all duration-300 ease-out flex flex-col h-full overflow-hidden"
         >
-            {/* Project Image Placeholder / Decorative Header */}
-            <div className="h-48 w-full bg-gradient-to-br from-primary/5 via-accent/5 to-secondary/5 relative overflow-hidden flex items-center justify-center">
-                <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <Folder className="w-16 h-16 text-primary/20 group-hover:scale-110 group-hover:text-primary/40 transition-all duration-500" />
+            {/* 16:9 Image Container - Compact Height */}
+            <div className="relative w-full h-[200px] bg-slate-50 overflow-hidden flex items-center justify-center border-b border-slate-100">
+                {project.image ? (
+                    <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                ) : (
+                    <div className="flex flex-col items-center gap-2">
+                        <Folder className="w-8 h-8 text-slate-300 group-hover:text-primary/40 transition-colors duration-500" />
+                        <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Preview</span>
+                    </div>
+                )}
+            </div>
 
-                {/* Category Badge */}
-                <div className="absolute top-4 left-4">
-                    <span className="px-4 py-1.5 bg-white/80 backdrop-blur-md text-primary text-xs font-black rounded-full shadow-sm uppercase tracking-widest border border-primary/10">
+            {/* Content Area */}
+            <div className="p-5 flex-1 flex flex-col">
+                {/* Category Badge - Below Image */}
+                <div className="mb-3">
+                    <span className="px-2.5 py-0.5 bg-slate-100 text-slate-600 text-[10px] font-bold uppercase tracking-wider rounded-full">
                         {project.category}
                     </span>
                 </div>
 
-                {/* GitHub link absolute */}
-                <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/80 backdrop-blur-md text-text-muted hover:text-primary flex items-center justify-center shadow-sm transition-all hover:scale-110"
-                >
-                    <Github size={20} />
-                </a>
-            </div>
+                <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors duration-300">
+                    {project.title}
+                </h3>
 
-            {/* Content Area */}
-            <div className="p-8 flex-1 flex flex-col">
-                <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-2xl font-black text-text-main group-hover:text-primary transition-colors duration-300">
-                        {project.title}
-                    </h3>
-                </div>
-
-                <p className="text-text-muted text-base leading-relaxed mb-8 flex-1">
+                <p className="text-slate-500 text-sm leading-relaxed mb-4 line-clamp-2">
                     {project.description}
                 </p>
 
                 {/* Tech Stack Tags */}
-                <div className="flex flex-wrap gap-2 mb-8">
+                <div className="flex flex-wrap gap-1.5 mb-6">
                     {project.tags.map((tag) => (
                         <span
                             key={tag}
-                            className="px-4 py-1.5 text-xs font-bold text-primary bg-primary/5 rounded-full border border-primary/10 group-hover:border-primary/30 transition-colors"
+                            className="px-2 py-0.5 text-[14px] font-medium text-slate-500 bg-slate-50 rounded-full border border-slate-100"
                         >
                             {tag}
                         </span>
                     ))}
                 </div>
 
-                {/* Action Button */}
-                <div className="pt-6 border-t border-slate-50">
+                {/* Action Buttons - Side-by-side & Compact */}
+                <div className="mt-auto flex items-center gap-3">
+                    {project.isUnderDevelopment ? (
+                        <div className="inline-flex items-center gap-1.5 px-4 py-2 bg-slate-50 text-slate-400 text-[10px] font-bold uppercase tracking-wider rounded-full border border-slate-100">
+                            In Development
+                        </div>
+                    ) : (
+                        <a
+                            href={project.demo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 px-4 py-2 bg-primary text-white text-xs font-bold rounded-full hover:bg-primary-dark transition-all shadow-sm active:scale-95"
+                        >
+                            <ArrowUpRight size={14} />
+                            {project.demoLabel || "Live Demo"}
+                        </a>
+                    )}
                     <a
-                        href={project.demo}
+                        href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-primary font-black uppercase tracking-widest text-sm group/btn"
+                        className="inline-flex items-center gap-1.5 px-4 py-2 bg-white text-slate-600 text-xs font-bold rounded-full border border-slate-200 hover:bg-slate-50 hover:border-slate-300 transition-all active:scale-95"
                     >
-                        Live Preview
-                        <span className="p-2 bg-primary/10 rounded-full group-hover/btn:bg-primary group-hover/btn:text-white transition-all duration-300">
-                            <ArrowUpRight size={18} />
-                        </span>
+                        <Github size={14} />
+                        GitHub
                     </a>
                 </div>
             </div>

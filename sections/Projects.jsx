@@ -8,45 +8,63 @@ const projects = [
     {
         title: "DineEase",
         category: "Web Development",
-        description: "A comprehensive restaurant reservation application built with the MERN stack. Features real-time booking, menu management, and user authentication.",
+        description: "MERN-stack restaurant reservation platform with real-time booking, menu management, and user authentication.",
         tags: ["MongoDB", "Express", "React", "Node.js"],
         github: "https://github.com/kalviumcommunity/s86_Vaishnavi_Capstone_DineEase.git",
         demo: "https://vaishnavi-dineease.vercel.app/",
+        image: "/Dinease-image.png",
+        demoLabel: "Live Demo"
     },
     {
-        title: "Local Train System",
+        title: "Local Train & Reroutes System",
         category: "Web Development",
-        description: "Developed a real-time local train tracking and intelligent rerouting system that helps commuters receive live updates and alternative travel suggestions during delays.",
+        description: "Real-time train tracking and intelligent rerouting system providing live updates and travel alternatives during delays.",
         tags: ["Next.js", "Tailwind", "TypeScript", "MongoDB"],
         github: "https://github.com/vaishnavikalluri/local-train-swi.git",
         demo: "https://localtrainsandre-routes.vercel.app/",
+        image: "/ltr-image.png",
+        demoLabel: "Live Demo"
     },
     {
         title: "Python Chessboard",
         category: "Python",
-        description: "An interactive chessboard designed using Tkinter. Implements game logic, piece movement validation, and a clean graphical interface.",
+        description: "Interactive chessboard GUI built with Tkinter featuring game logic and piece movement validation.",
         tags: ["Python", "Tkinter", "GUI Designs"],
         github: "https://github.com/vaishnavikalluri",
         demo: "#",
+        image: null,
+        isUnderDevelopment: true
     },
     {
-        title: "Tic-tac-toe",
+        title: "Tic Tac Toe AI",
         category: "Python",
-        description: "Created a GUI-based Tic Tac Toe game in Python where players can compete against the computer. Used Tkinter for the interface and implemented core game logic with basic AI for computer moves.",
-        tags: ["Python", "Tkinter"],
-        github: "https://github.com/vaishnavikalluri/Tic-tac-toe-python"
-
+        description: "GUI-based Tic Tac Toe game in Python featuring a computer opponent with optimized AI move logic.",
+        tags: ["Python", "Tkinter", "AI Concepts"],
+        github: "https://github.com/vaishnavikalluri/Tic-tac-toe-python",
+        demo: "https://github.com/vaishnavikalluri/Tic-tac-toe-python",
+        image: "/tic-tac-toe-image.jpeg",
+        demoLabel: "Clone to get Demo"
     }
 ];
 
 const Projects = () => {
     return (
-        <SectionWrapper id="projects" title="Featured Projects" subtitle="WHAT I BUILT">
-            <div className="grid md:grid-cols-2 gap-6">
-                {projects.map((project, index) => (
-                    <ProjectCard key={project.title} project={project} index={index} />
-                ))}
+        <SectionWrapper
+            id="projects"
+            title="Featured Projects"
+            subtitle="WHAT I BUILT"
+            className="bg-gradient-to-b from-white to-slate-50 relative overflow-hidden"
+        >
+            <div className="max-w-6xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+                    {projects.map((project, index) => (
+                        <ProjectCard key={project.title} project={project} index={index} />
+                    ))}
+                </div>
             </div>
+
+            {/* Subtle Decorative Background Element */}
+            <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-primary/2 rounded-full blur-3xl pointer-events-none" />
         </SectionWrapper>
     );
 };
