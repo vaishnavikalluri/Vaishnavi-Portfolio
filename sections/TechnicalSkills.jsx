@@ -158,9 +158,9 @@ const TechnicalSkills = () => {
                             <div className="w-full h-[1px] bg-[#E5E7EB] mb-[16px]" />
 
                             {/* Skill List */}
-                            <div className="space-y-[10px]">
+                            <div className="space-y-6">
                                 {category.skills.map((skill, sIdx) => (
-                                    <div key={sIdx} className="flex items-center gap-[10px] group/skill">
+                                    <div key={sIdx} className="flex items-center gap-4 group/skill">
                                         <div className="w-[22px] h-[22px] min-w-[22px] flex items-center justify-center transition-transform group-hover/skill:scale-110">
                                             <img
                                                 src={skill.logo}
@@ -195,7 +195,7 @@ const TechnicalSkills = () => {
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true }}
-                        className="flex flex-wrap gap-4"
+                        className="flex flex-wrap gap-x-6 gap-y-5"
                     >
                         {tools.map((tool, index) => (
                             <motion.div
